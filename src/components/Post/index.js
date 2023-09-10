@@ -317,13 +317,18 @@ const handleDeletePost = async (postId) => {
     }
   };
   
+  function truncateLink(link, maxLength) {
+    if (link.length > maxLength) {
+      return link.substring(0, maxLength) + "...";
+    }
+    return link;
+  }
   
 return (
   <Center bgColor= "#F3F2F0">
      <Box display="flex" marginTop={'70px'} gap='10px' minH="100vh" p="4">
   
   <Flex
-  
     spacing="1"
     top="70px" 
     left="4"
@@ -432,14 +437,14 @@ return (
             </Flex>
             {post.link && (
               <ChakraLink
-                color="blue"
-                href={post.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => handleLinkClick(post.id, post.link)}
-              >
-                {post.link}
-              </ChakraLink>
+                  color="blue"
+                  href={post.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => handleLinkClick(post.id, post.link)}
+                >
+                  {truncateLink(post.link, 50)} {/* Adjust the maxLength as needed */}
+                </ChakraLink>
             )}
             <Text fontWeight="bold" mt="2">
               {post.content}
@@ -498,13 +503,13 @@ return (
               </Flex>
               {post.link && (
                 <ChakraLink
-                  color="blue"
-                  href={post.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => handleLinkClick(post.id, post.link)}
-                >
-                  {post.link}
+                    color="blue"
+                    href={post.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => handleLinkClick(post.id, post.link)}
+                  >
+                    {truncateLink(post.link, 50)} 
                 </ChakraLink>
               )}
               <Text fontWeight="bold" mt="2">
