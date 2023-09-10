@@ -8,7 +8,6 @@ import { ColorModeProvider, CSSReset } from '@chakra-ui/react';
 function App() {
   return (
 
-
    <ChakraProvider>  
 
     <ColorModeProvider

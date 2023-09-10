@@ -11,9 +11,7 @@ import {
   Avatar,
   Spacer,
   Textarea,
-
   IconButton,
- 
   Modal,
   ModalOverlay,
   ModalContent,
@@ -44,6 +42,8 @@ import { Link as ChakraLink } from "@chakra-ui/react";
 import TopEngagers from "./TopEngager";
 import { BiTrash } from "react-icons/bi";
 
+
+// Post component
 export default function Post() {
   const { user } = useAuth();
   const [postLink, setPostLink] = useState("");
@@ -60,14 +60,15 @@ export default function Post() {
   const [topEngagers, setTopEngagers] = useState([]);
   const [topEngagerUsernames, setTopEngagerUsernames] = useState([]);
 
-
-
-  const postsToLoadPerClick = 2;
-
-
   const firestore = getFirestore();
   const { colorMode } = useColorMode();
 
+//  load more button ka logic 
+  const postsToLoadPerClick = 5;
+
+
+ 
+// use effect for top engagers
   useEffect(() => {
     
     const fetchTopEngagersUsernames = async () => {
@@ -91,11 +92,11 @@ export default function Post() {
 
 
 
-  
+  // engagement logic you need to create atleast 3 post to create a new post
   const requiredClicksToEngage = 3;
 
 
-
+//create post function 
 const handleCreatePost = async () => {
     if (userEngagedClicks < requiredClicksToEngage) {
       setEngagementMessage(
@@ -151,6 +152,8 @@ const handleCreatePost = async () => {
       }
     }
   };
+
+  // link click logic
 const handleLinkClick = async (postId, postLink) => {
     try {
       // Increment click count for the specific post link
@@ -173,6 +176,7 @@ const handleLinkClick = async (postId, postLink) => {
     }
   };
 
+  // fetch post logic from firebase 
 const fetchPosts = useCallback(async () => {
     const postsQuerySnapshot = await getDocs(collection(firestore, "posts"));
     const fetchedPostsData = [];
@@ -258,6 +262,8 @@ const fetchPosts = useCallback(async () => {
   
   }, [firestore]);
 
+
+  // use effect for fetch post and cooldown logic
   useEffect(() => {
     fetchPosts();
 
@@ -279,23 +285,40 @@ const fetchPosts = useCallback(async () => {
     return () => unsubscribe();
   }, [firestore, fetchPosts, isCooldown, cooldownTime]);
 
-  const handleDeletePost = async (postId) => {
+
+  // delete post logic
+const handleDeletePost = async (postId) => {
     try {
-      // Delete the post document from Firestore
-      await deleteDoc(doc(firestore, "posts", postId));
+      // Get the post document from Firestore
+      const postDocRef = doc(firestore, "posts", postId);
+      const postDoc = await getDoc(postDocRef);
   
-      // Remove the deleted post from the state
-      setFetchedPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
+      if (postDoc.exists()) {
+        const postData = postDoc.data();
   
-      // Optionally, you can also remove the post from todaysPosts and previousPosts if it's there
-      setTodaysPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
-      setPreviousPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
+        // Check if the post belongs to the currently logged-in user
+        if (postData.userId === user.uid) {
+          // Delete the post document from Firestore
+          await deleteDoc(postDocRef);
+  
+          // Remove the deleted post from the state
+          setFetchedPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
+  
+          // Optionally, you can also remove the post from todaysPosts and previousPosts if it's there
+          setTodaysPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
+          setPreviousPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
+        } else {
+          // Display a message that the user cannot delete this post
+          console.log("You can only delete your own posts.");
+        }
+      }
     } catch (error) {
       console.error("Error deleting post:", error);
     }
   };
   
-  return (
+  
+return (
   <Center bgColor= "#F3F2F0">
      <Box display="flex" marginTop={'70px'} gap='10px' minH="100vh" p="4">
   
@@ -421,15 +444,16 @@ const fetchPosts = useCallback(async () => {
             <Text fontWeight="bold" mt="2">
               {post.content}
             </Text>
-
-            <Flex >
-            <IconButton
-              colorScheme="red"
-              aria-label="Delete post"
-              icon= {<BiTrash />}
-              onClick={() => handleDeletePost(post.id)}
-            />
-            </Flex>
+            {post.userId === user.uid && ( // Only show delete button if the post belongs to the current user
+              <Flex justifyContent= "space-between">
+                <IconButton
+                  colorScheme="blue"
+                  aria-label="Delete post"
+                  icon={<BiTrash />}
+                  onClick={() => handleDeletePost(post.id)}
+                />
+              </Flex>
+            )}
            
           </Box>
         ))}
@@ -486,14 +510,16 @@ const fetchPosts = useCallback(async () => {
               <Text fontWeight="bold" mt="2">
                 {post.content}
               </Text>
-              <Flex>
-            <IconButton
-              colorScheme="blue"
-              aria-label="Delete post"
-              icon={<BiTrash />}  
-              onClick={() => handleDeletePost(post.id)}
-            />
-            </Flex>
+              {post.userId === user.uid && ( // Only show delete button if the post belongs to the current user
+                <Flex justifyContent= "space-between">
+                  <IconButton
+                    colorScheme="blue"
+                    aria-label="Delete post"
+                    icon={<BiTrash />}
+                    onClick={() => handleDeletePost(post.id)}
+                  />
+                </Flex>
+              )}
             
             </Box>
           ))}
