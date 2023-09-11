@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { Outlet, useLocation , useNavigate} from 'react-router-dom'
 import { useAuth } from '../../hooks/auth';
 import Navbar from '../navbar'
-import Post from '../Post'
+// import Post from '../Post'
 import UserProfileSidebar from '../sidebar'
 
 
@@ -29,7 +29,7 @@ export default function Layout() {
     <>
       <Navbar />
       <UserProfileSidebar />
-      <Post/>
+      {/* <Post/> */}
       {/* <Footer /> */}
       <Outlet />
      
