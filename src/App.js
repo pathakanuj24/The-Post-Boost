@@ -4,6 +4,9 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { RouterProvider } from 'react-router-dom';
 import { router } from './lib/routes';
 import { ColorModeProvider, CSSReset } from '@chakra-ui/react';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/bootstrap/dist/js/bootstrap';
+import "App.css";
 
 function App() {
   return (
