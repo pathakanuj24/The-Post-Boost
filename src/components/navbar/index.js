@@ -13,7 +13,7 @@ export default function Navbar() {
       padding="2"
       pos="fixed"
       top="0"
-      bgColor="white"
+      bgColor="#0A66C2"
       left="0"
       width="100%"
       borderBottom="1px solid #e1e1e1"
@@ -25,7 +25,7 @@ export default function Navbar() {
         <HStack spacing="4">
           <Link as={RouterLink} to={DASHBOARD}>
             <Image
-              src="/images/logo.gif"
+              src="/images/logo2.gif"
               alt="Company Logo"
               h="auto"
               w="50px"
@@ -34,38 +34,29 @@ export default function Navbar() {
               borderRadius="50%"
             />
           </Link>
-          <Box fontSize="xl" fontWeight="bold" transition="color 0.2s">
+          <Box fontSize="xl" fontWeight="bold">
             <Link
               as={RouterLink}
               to={DASHBOARD}
-              _hover={{
-                textDecoration: 'underline',
-                color: '#1363DF',
-              }}
+              color="white" // Set text color to white
             >
               HOME
             </Link>
           </Box>
-          <Box fontSize="xl" fontWeight="bold" transition="color 0.2s">
+          <Box fontSize="xl" fontWeight="bold">
             <Link
               as={RouterLink}
               to={ABOUT}
-              _hover={{
-                textDecoration: 'underline',
-                color: '#1363DF',
-              }}
+              color="white" // Set text color to white
             >
               ABOUT
             </Link>
           </Box>
-          <Box fontSize="xl" fontWeight="bold" transition="color 0.2s">
+          <Box fontSize="xl" fontWeight="bold">
             <Link
               as={RouterLink}
               to={CONTACT}
-              _hover={{
-                textDecoration: 'underline',
-                color: '#1363DF',
-              }}
+              color="white" // Set text color to white
             >
               CONTACT
             </Link>
@@ -75,14 +66,10 @@ export default function Navbar() {
 
       <HStack spacing="4">
         <Button
-          variant="outline"
           size="md"
           bgColor="black"
           color="white"
-          _hover={{
-            bgColor: '#1363DF',
-            color: 'white',
-          }}
+          background= "black"
           onClick={() => {
             logout();
           }}

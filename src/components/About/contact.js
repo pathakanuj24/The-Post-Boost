@@ -28,12 +28,10 @@ import {
 } from 'react-icons/md'
 import { BsGithub, BsDiscord, BsPerson } from 'react-icons/bs'
 import Navbar from 'components/navbar'
-import UserProfileSidebar from 'components/sidebar/index.js'
 
 export default function Contact() {
   return (
-    <Container bg="#F3F2F0" maxW="full" mt={10}  centerContent overflow="hidden">
-       <UserProfileSidebar />
+    <Container bg="#F4F2EE" maxW="full" mt={10}  centerContent overflow="hidden">
     <Spacer />
     <Navbar />
       <Flex>

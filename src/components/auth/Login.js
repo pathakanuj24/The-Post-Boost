@@ -32,6 +32,7 @@ import { auth } from "lib/firebase";
 
 function SuccessPopup({ isOpen, onClose }) {
   return (
+    
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent
@@ -118,7 +119,7 @@ export default function Login() {
   };
 
   return (
-    <Center w="100%" h="100vh">
+    <Center bgColor = "#F4F2EE" w="100%" h="100vh">
       <Box mx="1" maxW="md" p="9" borderWidth="1px" borderRadius="lg">
         <Heading mb="4" size="lg" textAlign="center">
           Welcome Back!

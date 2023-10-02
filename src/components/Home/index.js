@@ -5,7 +5,7 @@ import { LOGIN, REGISTER } from 'lib/routes';
 
 export default function Home() {
   return (
-    <Center minH="100vh">
+    <Center minH="100vh" bgColor= "#F4F2EE">
       <Stack spacing={8} direction={{ base: 'column', md: 'row' }} align="center">
         <div style={{ flex: 1 }}>
           {/* Embed the video using the <video> element */}

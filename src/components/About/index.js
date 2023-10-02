@@ -18,12 +18,11 @@ import { FaArrowLeft } from 'react-icons/fa';
 import { DASHBOARD } from 'lib/routes';
 
 import { Link as RouterLink } from "react-router-dom";
-import UserProfileSidebar from 'components/sidebar/index.js'
+
 
 const AboutUs = () => {
   return (
-    <Box bgColor="#F3F2F0">
-      <UserProfileSidebar />
+    <Box bgColor= "#F4F2EE">
       <Navbar />
 
       <IconButton
@@ -101,20 +100,7 @@ const AboutUs = () => {
                 
               </Box>
             </GridItem>
-            <GridItem>
-              <Box textAlign="center">
-                <Image
-                  rounded="full"
-                  // src="/images/hi.png"
-                  alt="Anuj Pathak - Founder"
-                  display={{ base: "none", md: "block" }}
-                />
-                <Text fontSize="xl" fontWeight="medium" color="gray.800" mt={2}>
-                  Anirudha
-                </Text>
-                
-              </Box>
-            </GridItem>
+           
             {/* Add similar GridItem components for other members */}
           </Grid>
         </Stack>

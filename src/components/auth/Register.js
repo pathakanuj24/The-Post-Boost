@@ -56,7 +56,7 @@ export default function Register() {
   }
 
   return (
-    <Center w="100%" h="100vh">
+    <Center w="100%" h="100vh" bgColor= "#F4F2EE">
       <Box Box mx="1" maxW="400px" p="4" borderWidth="1px" borderRadius="lg">
         <Heading mb="4" size="lg" textAlign="center">
           Sign Up
